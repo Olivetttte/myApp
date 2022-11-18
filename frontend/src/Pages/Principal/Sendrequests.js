@@ -198,6 +198,19 @@ function Tasks() {
     }, [taskError])
 
 
+    const [ item, setItem ] = useState("Input");
+
+    const renderItem =() =>{
+      switch (item) {
+        case "Skilled Professional" : return<input type='number' min='1' step='any' />
+        case "Unskilled Professional" : return<input type='number' min='1' step='any' />
+        case "Verified Professional" : return<input type='number' min='1' step='any' />
+        case "Unverified Professional": return<input type='number' min='1' step='any' />
+      }
+    }
+
+
+
 
 
     return (
@@ -271,13 +284,21 @@ function Tasks() {
                   <div className="form-group">
                     <label>Task Payment</label>
                     <input
-                      type="text"
+                      type="number"
                       className="form-control"
                       name="taskPrice"
                       value={task.taskPrice}
                       onChange={handleInputChange}
+                      append = { renderItem() } 
                     />
+                    <select value={item} onChange ={ (e) => setItem(e.target.value)}>
+                      <option>Skilled Professional</option>
+                      <option>Unskilled Professional</option>
+                      <option>Verified Professional</option>
+                      <option>Unverified Professional</option>
+                    </select>
                   </div>
+                  
                   <div className="form-group">
                     <label>Task Location</label>
                     <PlacesAutocomplete
@@ -306,7 +327,7 @@ function Tasks() {
                               const className = suggestion.active
                                 ? "suggestion-item--active"
                                 : "suggestion-item";
-                              // inline style for demonstration purpose
+                              // inline style
                               const style = suggestion.active
                                 ? {
                                     backgroundColor: "#fafafa",
