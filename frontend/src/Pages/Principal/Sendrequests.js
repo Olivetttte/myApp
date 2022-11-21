@@ -158,7 +158,7 @@ function Tasks() {
         setTaskList(newTaskList)
     }
 
-
+    //TaskLocation
     const[address, setAddress] = useState(" ")
     //const [coordinates, setCoordinates] = useState({
       //lat: null,
@@ -197,7 +197,7 @@ function Tasks() {
       }
     }, [taskError])
 
-
+    ///taskPayment
     const [ item, setItem ] = useState("Input");
 
     const renderItem =() =>{
@@ -209,7 +209,19 @@ function Tasks() {
       }
     }
 
+    const [count, useCounter] = useState(0)
 
+    const Increase = () => {
+      useCounter(count + 10)
+    }
+
+    const Decrease = () => {
+      useCounter (count - 10)
+    }
+
+    const Reset = () => {
+      useCounter(0)
+    }
 
 
 
@@ -291,11 +303,12 @@ function Tasks() {
                       onChange={handleInputChange}
                       append = { renderItem() } 
                     />
-                    <select value={item} onChange ={ (e) => setItem(e.target.value)}>
-                      <option>Skilled Professional</option>
-                      <option>Unskilled Professional</option>
-                      <option>Verified Professional</option>
-                      <option>Unverified Professional</option>
+                    <select name='professional' value={item} onChange ={ (e) => setItem(e.target.value)}>
+                      <option onClick={() => Reset()}>Select a Professional</option>
+                      <option onClick={() => Increase()}>Skilled Professional</option>
+                      <option onClick={() => Decrease()}>Unskilled Professional</option>
+                      <option onClick={() => Increase()}>Verified Professional</option>
+                      <option onClick={() => Decrease()}>Unverified Professional</option>
                     </select>
                   </div>
                   
@@ -372,7 +385,7 @@ function Tasks() {
                       name="taskCreatedOn"
                       value={task.taskCreatedOn}
                       onChange={handleInputChange}
-                      placeholder="The date is automatically selected onclicking submit"
+                      placeholder="The date is automatically selected upon clicking submit"
                     />
                   </div>
                   {/* <div className="form-group">
@@ -452,6 +465,3 @@ function Tasks() {
 }
 
 export default Tasks
-
-
-    
